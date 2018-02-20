@@ -5,23 +5,23 @@
         <div class="col-md-2 text-left">
           FrontendR
         </div>
-        <div class="col-md-8">
-          <span @click="getArticles">
+        <div class="col-md-8 header">
+          <span @click="getArticles('mtv-news')">
             MTV
           </span> | 
-          <span>
+          <span @click="getArticles('the-verge')">
             THEVERGE
           </span> | 
-          <span>
+          <span @click="getArticles('recode')">
             RECODE
           </span> | 
-          <span>
+          <span @click="getArticles('polygon')">
             POLYGON
           </span> |
-          <span>
+          <span @click="getArticles('bbc-news')">
             BBC
           </span> | 
-          <span>
+          <span @click="getArticles('national-geographic')">
             NATGEO
           </span>
         </div>
@@ -32,11 +32,14 @@
     </div>
     <div class="container">
       <div class="row">
-        <div class="col-md-4 text-center" v-for="item in data">
+        <div class="col-md-6 text-center" v-for="item in data">
             <div style="font-size: 12px; margin-bottom: 8px;">{{ item.source.name }}</div>
-            <img :src="item.urlToImage" style="width: 100%; height: auto" alt="">
-            <!-- {{ item }} --> <br><br>
-            <div style="width: 80%; text-transform: uppercase; font-weight: 600; margin: auto;">
+            <div style="width: 100%; padding-bottom: 55%; background-color: #CCC; position: relative;">
+              <div style="position: absolute; top: 0; bottom: 0; left: 0; right: 0; overflow: hidden; background-size: cover;" v-bind:style="{ 'background-image': 'url(' + item.urlToImage + ')' }">
+              </div>
+            </div>
+            <br><br>
+            <div style="width: 80%; font-size: 16px; text-transform: uppercase; font-weight: 600; margin: auto;">
               {{ item.title }} 
             </div> <br>
             <div style="width: 80%; margin: auto;">
@@ -50,6 +53,7 @@
 
 <script>
 import axios from 'axios'
+import Vue from 'vue'
 
 export default {
   name: 'HelloWorld',
@@ -61,22 +65,21 @@ export default {
     }
   },
   created () {
-
+    this.getArticles('mtv-news')
   },
   methods: {
-    getArticles: function () {
+    getArticles: function (source) {
       let self = this
-      alert('Hello!')
-      axios.get(`https://newsapi.org/v2/everything?sources=the-verge&apiKey=86fa2caa5dac471a98d05dfa2d141b6f`)
-      .then(response => {
-        // JSON responses are automatically parsed.
-        // Vue.set(self.data, response.data) =
-        // self.data.push('1231231')
-        self.data = self.data.concat(response.data.articles)
+      self.data = []
 
-        // console.log(self.data)
-        console.log(response.data.articles)
-        // console.log(typeof response.data.sources)
+      axios.get('https://newsapi.org/v2/everything?sources=' + source + '&apiKey=86fa2caa5dac471a98d05dfa2d141b6f')
+      .then(response => {
+        let articles = response.data.articles
+
+        articles.forEach(function (item, index) {
+          console.log(index)
+          Vue.set(self.data, index, item)
+        })
       })
       .catch(e => {
         console.log(e)
@@ -89,6 +92,11 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+
+.header > span:hover {
+  cursor: pointer;
+}
+
 h1, h2 {
   font-weight: normal;
 }
