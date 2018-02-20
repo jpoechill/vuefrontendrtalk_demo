@@ -3,7 +3,7 @@
     <div class="container" style="margin-bottom: 10px;">
       <div class="row">
         <div class="col-md-2 text-left">
-          FrontendR
+          <i>Frontendr</i>
         </div>
         <div class="col-md-8 header">
           <span @click="getArticles('mtv-news')">
@@ -35,12 +35,16 @@
         <div class="col-md-6 text-center" v-for="item in data">
             <div style="font-size: 12px; margin-bottom: 8px;">{{ item.source.name }}</div>
             <div style="width: 100%; padding-bottom: 55%; background-color: #CCC; position: relative;">
-              <div style="position: absolute; top: 0; bottom: 0; left: 0; right: 0; overflow: hidden; background-size: cover;" v-bind:style="{ 'background-image': 'url(' + item.urlToImage + ')' }">
-              </div>
+              <a :href="item.url">
+                <div style="position: absolute; top: 0; bottom: 0; left: 0; right: 0; overflow: hidden; background-size: cover;" v-bind:style="{ 'background-image': 'url(' + item.urlToImage + ')' }">
+                </div>
+              </a>
             </div>
             <br><br>
             <div style="width: 80%; font-size: 16px; text-transform: uppercase; font-weight: 600; margin: auto;">
-              {{ item.title }} 
+              <a :href="item.url">
+                {{ item.title }} 
+              </a>
             </div> <br>
             <div style="width: 80%; margin: auto;">
               {{ item.description }}
@@ -109,6 +113,6 @@ li {
   margin: 0 10px;
 }
 a {
-  color: #42b983;
+  color: #0275d8;
 }
 </style>

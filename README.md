@@ -2,6 +2,9 @@
 
 > A Vue.js project
 
+## Screenshot
+![Frontendr Screenshot](/static/screenshot.png)
+
 ## Build Setup
 
 ``` bash
