@@ -1,4 +1,4 @@
-# vuefrontendrtalk_demo
+# Frontendr Demo Project
 
 > A Vue.js project
 
