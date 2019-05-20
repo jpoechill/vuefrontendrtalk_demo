@@ -8,10 +8,12 @@
           </i></a>
         </div>
         <div class="col-md-8 header" style="word-spacing: 12px; font-weight: 700;">
-          <span @click="getArticles('mtv-news')">MTV</span>
+          <span class="active" @click="getArticles('mtv-news')">MTV</span>
           <span @click="getArticles('the-verge')">VERGE</span>
           <span @click="getArticles('polygon')">POLYGON</span> | 
-          <span><a href="https://juxtapoz.com" target="_blank">JUX</a></span>
+          <span>
+            <a href="https://juxtapoz.com" target="_blank">JUX</a>
+          </span>
         </div>
         <div class="col-md-2 text-right font-special">
           <a href="/"><i>
@@ -22,7 +24,7 @@
     </div>
     <div class="container" style="margin-top: 59px; width: 100%; padding: 0px;">
       <div class="row" style="margin: 0px;">
-        <div class="col-md-12 text-center" style="padding: 0px;" v-for="(item, index) in data" :key="index">
+        <div class="col-md-12 text-center pb-4" style="padding: 0px;" v-for="(item, index) in data" :key="index">
           <div style="width: 100%; padding-bottom: 55%; background-color: #CCC; position: relative;">
             <a :href="item.url" target="_blank">
               <div style="position: absolute; z-index: 1; top: 0; bottom: 0; left: 0; right: 0; overflow: hidden; background-size: cover;" v-bind:style="{ 'background-image': 'url(\'' + item.urlToImage + '\')' }">
@@ -41,35 +43,48 @@
             </a>
           </div>
           <br>
-          <div style="width: 70%; font-size: 16px; text-transform: uppercase; font-weight: 600; margin: auto;">
-            <a :href="item.url" target="_blank">
-              {{ item.title }} 
-            </a>
-          </div><br>
-          <div style="width: 70%; margin: auto;">
-            {{ item.description }}
-          </div><br><br>
+          <!--  -->
+          <div class="container">
+            <div class="row">
+              <div class="offset-md-2 col-md-8">
+                <div class="text-left" style="font-size: 20px; text-transform: uppercase; font-weight: 900;">
+                  <a :href="item.url" target="_blank">
+                    {{ item.title }} 
+                  </a>
+                  <br><br>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="offset-md-2 col-md-8">
+                <div class="text-left">
+                  {{ item.description }} <br><br> ↥
+                </div><br><br>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
-    
-      <div class="container fixed-bottom text-uppercase pb-4" style="width: 100%; font-size: 18px; font-weight: 500; background-color: #FFF; padding-top: 10px; padding-bottom: 10px; border-top: 1px solid #eee; padding-left: 8%; padding-right: 8%; margin: 0 0 0 0px">
-        <div class="row">
-          <div class="col-md-3 text-center">
-            Visits today: {{ counters.daily }}
-          </div>
-          <div class="col-md-3 text-center">
-            Visits this week: {{ counters.weekly }}
-          </div>
-          <div class="col-md-3 text-center">
-            Visits this month: {{ counters.monthly }}
-          </div>
-          <div class="col-md-3 text-center">
-          All-time: {{ counters.allTime }}
-          </div>
+    <div class="container fixed-bottom text-uppercase pb-4" style="width: 100%; font-size: 18px; font-weight: 500; background-color: #FFF; padding-top: 10px; padding-bottom: 10px; border-top: 1px solid #eee; padding-left: 8%; padding-right: 8%; margin: 0 0 0 0px">
+      <div class="row">
+        <div class="col-md-4 text-center">
+          Last seen: 4 hours ago
         </div>
+        <div class="col-md-4 text-center">
+          Visits today: {{ counters.daily }}
+        </div>
+        <div class="col-md-4 text-center">
+          Visits this week: {{ counters.weekly }}
+        </div>
+        <!-- <div class="col-md-3 text-center">
+          Visits this month: {{ counters.monthly }}
+        </div> -->
+        <!-- <div class="col-md-3 text-center">
+        All-time: {{ counters.allTime }}
+        </div> -->
       </div>
-    </transition>
+    </div>
   </div>
 </template>
 
@@ -139,8 +154,6 @@ export default {
 
         console.log('Trace')
 
-        console.log(fbData)
-
         ref.update({
           daily: fbData.daily + 1,
           weekly: fbData.weekly + 1,
@@ -197,9 +210,17 @@ textarea:focus, input:focus{
   font-size: 1.3rem;
 }
 
+.header > span, .header > span > a{
+  color: #bbb;
+}
+
 .header > span:hover {
   cursor: pointer;
   border-bottom: 2px solid #333;
+}
+
+.header > .active {
+  color: #333;
 }
 
 h1, h2 {

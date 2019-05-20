@@ -2,7 +2,7 @@
   <div id="app">
     <Main/>
     <div class="container pb-4">
-      <div class="row pb-4">
+      <div class="row pb-5">
         <div class="col-md-12 pb-2" style="text-align: center; font-size: 14px; margin-bottom: 4px;  margin-top: 10px;">
           <a href="http://rithfolio.com">
             <img src="/static/Po_logo.png" style="margin-right: 22px; width: 28px; height: 28px; margin-top: -20px;" alt="">
