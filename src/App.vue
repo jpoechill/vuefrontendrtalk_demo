@@ -43,4 +43,33 @@ export default {
   margin-top: 12px;
   font-size: 18px;
 }
+
+.modal-content {
+  border-radius: 20px;
+  padding: 10px;
+  /* top: 80px; */
+  border: 10px solid #eee;
+}
+
+.modal-dialog {
+  top: 40px;
+}
+
+.modal-backdrop {
+  /* background-color: #999; */
+  display: none;
+}
+
+
+
+body {
+  background: #eee;
+}
+
+.modal-open{
+  overflow:hidden;
+  padding-right:0 !important;
+  margin-top: 70px;
+}
+
 </style>
