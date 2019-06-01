@@ -1,5 +1,9 @@
 <template>
   <div>
+    <div class="text-left fixed-bottom panel-info-count">
+      <div class="text-center"><strong>${{ ttlProfits }}</strong></div>
+      <!-- <div class="text-left"><strong>visits today</strong> <span class="float-right"><light>{{ counters.daily }}</light></span></div> -->
+    </div>
     <div class="text-left fixed-bottom panel-info">
       <div class="text-left"><strong>curr profits</strong> <span class="float-right"><light>${{ ttlProfits }}</light></span></div>
       <!-- <div class="text-left"><strong>visits today</strong> <span class="float-right"><light>{{ counters.daily }}</light></span></div> -->
@@ -9,9 +13,24 @@
     <div class="text-left fixed-bottom panel-bank-account">
       <div class="text-left"><strong>bank account</strong> <span class="float-right"><light>${{ bankAccount }}</light></span></div>
     </div>
-    <div class="text-center panel-send-money fake-link" @click="playSound()">
-      Pay Now
+
+    <div class="text-center panel-send-money-01 fake-link" @click="playSound()">
+      <!-- Pay $10 -->
+      Happy Customer
     </div>
+    <div class="text-center panel-send-money-02 fake-link" @click="playSound()">
+      <!-- Pay $100 -->
+      Very Happy Customer
+    </div>
+    <div class="text-center panel-send-money-03 fake-link" @click="playSound()">
+      Pay $1000
+    </div>
+    <div class="text-center panel-send-money-04 fake-link" @click="playSound()">
+      Pay $10,000
+    </div>
+    <!-- <div class="text-center panel-send-money fake-link" @click="playSound()">
+      Pay Now
+    </div> -->
     <div class="text-center panel-cash-out fake-link" @click="cashOut()">
       Cash Out
     </div>
@@ -85,16 +104,18 @@
       <div class="container mt-4">
         <div class="row pl-4 pr-4 pt-4 pb-2">
           <div class="offset-md-2 panel col-md-8 p-5">
-            <div class="text-left" style="font-size: 20px; text-transform: uppercase; font-weight: 900;">
-              <a :href="item.url" target="_blank">
-                {{ item.title }} 
-              </a>
-              <br><br>
-            </div>
-            <div class="text-left">
-              {{ item.description }} <br><br> <span class="fake-link" @click="scrollToTop()">↥</span>
-              <br>
-            </div>
+            <a :href="item.url" target="_blank">
+              <div>
+                <div class="text-left" style="font-size: 20px; text-transform: uppercase; font-weight: 900;">
+                  {{ item.title }} 
+                  <br><br>
+                </div>
+                <div class="text-left">
+                  {{ item.description }} <br><br> <span class="fake-link" @click="scrollToTop()">↥</span>
+                  <br>
+                </div>
+              </div>
+            </a>
           </div>
         </div>
       </div>
@@ -387,6 +408,20 @@ light {
   font-weight: 200;
 }
 
+.panel-info-count {
+  font-weight: 500;
+  background-color: rgba(0, 0, 0, .4);
+  /* padding: 10px 8%; */
+  /* border-top: 1px solid rgb(238, 238, 238); */
+  margin: 132px 20px;
+  display: block;
+  width: 208px;
+  padding: 10px 12px;
+  color: #fff;
+  border-radius: 30px;
+  font-size: 80px;
+}
+
 .panel-info {
   font-weight: 500;
   background-color: rgba(0, 0, 0, .4);
@@ -397,7 +432,7 @@ light {
   width: 208px;
   padding: 10px 12px;
   color: #fff;
-  /* border-radius: 10px; */
+  border-radius: 20px;
   font-size: 16px;
 }
 
@@ -418,7 +453,70 @@ light {
 
 .panel-send-money {
   font-weight: 500;
-  /* background-color: rgba(0, 0, 0, .6); */
+  margin: 20px;
+  display: block;
+  bottom: 200px;
+  right: 0px;
+  padding: 10px 30px;
+  color: #333;
+  font-size: 16px;
+  position: fixed;
+  border-radius: 100px;
+  background: #fff;
+  font-weight: 700;
+  transition: .05s ease;
+}
+
+.panel-send-money-01 {
+  font-weight: 500;
+  margin: 20px;
+  display: block;
+  bottom: 309px;
+  right: 0px;
+  padding: 10px 30px;
+  color: #333;
+  font-size: 16px;
+  position: fixed;
+  border-radius: 100px;
+  background: #fff;
+  font-weight: 700;
+  transition: .05s ease;
+}
+
+.panel-send-money-02 {
+  font-weight: 500;
+  margin: 20px;
+  display: block;
+  bottom: 246px;
+  right: 0px;
+  padding: 10px 30px;
+  color: #333;
+  font-size: 16px;
+  position: fixed;
+  border-radius: 100px;
+  background: #fff;
+  font-weight: 700;
+  transition: .05s ease;
+}
+
+.panel-send-money-03 {
+  font-weight: 500;
+  margin: 20px;
+  display: block;
+  bottom: 182px;
+  right: 0px;
+  padding: 10px 30px;
+  color: #333;
+  font-size: 16px;
+  position: fixed;
+  border-radius: 100px;
+  background: #fff;
+  font-weight: 700;
+  transition: .05s ease;
+}
+
+.panel-send-money-04 {
+  font-weight: 500;
   margin: 20px;
   display: block;
   bottom: 120px;
@@ -430,10 +528,6 @@ light {
   border-radius: 100px;
   background: #fff;
   font-weight: 700;
-  /* -webkit-box-shadow: 10px 10px 10px rgba(0, 0, 0, .5); */
-  /* box-shadow: 4px 4px 10px 0px rgba(0, 0, 0, .5); */
-  /* border: 1px solid #ddd; */
-
   transition: .05s ease;
 }
 
@@ -475,6 +569,10 @@ light {
   /* box-shadow: 4px 4px 10px 0px rgba(0, 0, 0, .5); */
   /* border: 1px solid #ddd; */
   transition: .05s ease;
+}
+
+.panel-send-money-01:hover, .panel-send-money-02:hover, .panel-send-money-03:hover, .panel-send-money-04:hover {
+  box-shadow: 0px 0px 0px 10px #e9e9e9;
 }
 
 .panel-send-money:hover, .panel-cash-out:hover, .panel-make-disappear:hover {
