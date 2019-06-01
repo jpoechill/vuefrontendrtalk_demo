@@ -67,9 +67,10 @@ body {
 }
 
 .modal-open{
-  overflow:hidden;
+  overflow: hidden;
   padding-right:0 !important;
-  margin-top: 70px;
+  margin-top: 80px;
+  margin-right: 0px;
 }
 
 </style>

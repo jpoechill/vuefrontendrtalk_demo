@@ -1,5 +1,23 @@
 <template>
   <div>
+    <div class="text-left fixed-bottom panel-info">
+      <div class="text-left"><strong>curr profits</strong> <span class="float-right"><light>${{ ttlProfits }}</light></span></div>
+      <!-- <div class="text-left"><strong>visits today</strong> <span class="float-right"><light>{{ counters.daily }}</light></span></div> -->
+      <div class="text-left"><strong>visits this week</strong> <span class="float-right"><light>{{ counters.weekly }}</light></span></div>
+      <div class="text-left"><strong>last seen</strong> <span class="float-right"><light>4 hours ago</light></span></div>
+    </div>
+    <div class="text-left fixed-bottom panel-bank-account">
+      <div class="text-left"><strong>bank account</strong> <span class="float-right"><light>${{ bankAccount }}</light></span></div>
+    </div>
+    <div class="text-center panel-send-money fake-link" @click="playSound()">
+      Pay Now
+    </div>
+    <div class="text-center panel-cash-out fake-link" @click="cashOut()">
+      Cash Out
+    </div>
+    <div class="text-center panel-make-disappear fake-link" @click="cashOut()">
+      Make Disappear
+    </div>
     <!-- Start Modal -->
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog d-flex h-50 align-items-center" role="document">
@@ -38,7 +56,7 @@
           <div class="col-md-2 header h-100 d-none d-md-block">
             <div class="h-100 d-flex align-items-center justify-content-end">
               <div data-toggle="modal" data-target="#exampleModal">
-                <span class="fake-link">XXX</span>
+                <span class="fake-link">•••</span>
               </div>
             </div>
           </div>
@@ -47,23 +65,25 @@
     </div>
     <div style="margin-top: 80px;"></div>
     <div v-for="(item, index) in data" :key="index" class="w-100 pb-5 mb-2 position-relative">
-      <a :href="item.url" target="_blank">
-        <div class="w-100 bg-primary position-relative" style="padding-bottom: 55%; background-size: cover;" v-bind:style="{ 'background-image': 'url(\'' + item.urlToImage + '\')' }">
-          <div class="position-absolute">
-            <div class="container">
-              <div class="row">
-                <div class="col-md-12 text-left">
-                  <span v-if="item.source" :style="{backgroundColor: getPastelColour()}" class="bg-pastel">
-                    {{ item.source.name }}
-                  </span>
+      <!-- <a :href="item.url" target="_blank"> -->
+        <transition name="fade" appear>
+          <div class="w-100 bg-primary position-relative" style="min-height: 100%; padding-bottom: 55%; background-size: cover;" v-bind:style="{ 'background-image': 'url(\'' + item.urlToImage + '\')' }">
+            <div class="position-absolute">
+              <div class="container">
+                <div class="row">
+                  <div class="col-md-12 text-left">
+                    <span v-if="item.source" :style="{ backgroundColor: getPastelColour() }" class="bg-pastel">
+                      {{ item.source.name }}
+                    </span>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-      </a>
-      <div class="container mt-5">
-        <div class="row pl-4 pr-4 pt-2 pb-2">
+        </transition>
+      <!-- </a> -->
+      <div class="container mt-4">
+        <div class="row pl-4 pr-4 pt-4 pb-2">
           <div class="offset-md-2 panel col-md-8 p-5">
             <div class="text-left" style="font-size: 20px; text-transform: uppercase; font-weight: 900;">
               <a :href="item.url" target="_blank">
@@ -76,19 +96,6 @@
               <br>
             </div>
           </div>
-        </div>
-      </div>
-    </div>
-    <div class="container fixed-bottom text-uppercase pb-4" style="width: 100%; font-size: 18px; font-weight: 500; background-color: #FFF; padding-top: 10px; padding-bottom: 10px; border-top: 1px solid #eee; padding-left: 8%; padding-right: 8%; margin: 0 0 0 0px">
-      <div class="row">
-        <div class="col-md-4 text-center">
-          Last seen: 4 hours ago
-        </div>
-        <div class="col-md-4 text-center">
-          Visits today: {{ counters.daily }}
-        </div>
-        <div class="col-md-4 text-center">
-          Visits this week: {{ counters.weekly }}
         </div>
       </div>
     </div>
@@ -107,6 +114,9 @@ export default {
     return {
       API_Key: '86fa2caa5dac471a98d05dfa2d141b6f',
       data: [],
+      loaded: false,
+      ttlProfits: 0,
+      bankAccount: 0,
       searchText: '',
       sources: [
         {
@@ -142,6 +152,8 @@ export default {
   mounted() {
     this.getVisitors();
     this.updateCounts();
+
+    this.loaded = true;
 
     console.log('123')
     // get visitor count
@@ -233,6 +245,21 @@ export default {
         window.scrollTo(0, 0);
       })
     },
+    cashOut () {
+      let file = '/static/shazam.mp3'
+      var audio = new Audio(file);
+      audio.play();
+
+      this.bankAccount += this.ttlProfits
+      this.ttlProfits = 0;
+    },
+    playSound: function () {
+      let file = '/static/cha-ching.mp3'
+      var audio = new Audio(file);
+      audio.play();
+
+      this.ttlProfits += 10;
+    },
     getPastelColour: function () {
       return "hsl(" + 360 * Math.random() + ',' + (25 + 70 * Math.random()) + '%,' + (85 + 10 * Math.random()) + '%)';
     },
@@ -250,7 +277,7 @@ textarea:focus, input:focus{
 
 .bg-white {
   background-color: #FFF;
-  border-bottom: 10px solid #eee;
+  border-top: 10px solid #eee;
   padding: 20px;
 }
 
@@ -349,6 +376,109 @@ a:hover {
   /* border: 20px solid #ddd; */
   cursor: pointer;
   /* background-origin: border-box; */
+}
+
+
+strong {
+  font-weight: 900;
+}
+
+light {
+  font-weight: 200;
+}
+
+.panel-info {
+  font-weight: 500;
+  background-color: rgba(0, 0, 0, .4);
+  /* padding: 10px 8%; */
+  /* border-top: 1px solid rgb(238, 238, 238); */
+  margin: 20px;
+  display: block;
+  width: 208px;
+  padding: 10px 12px;
+  color: #fff;
+  /* border-radius: 10px; */
+  font-size: 16px;
+}
+
+.panel-bank-account {
+  font-weight: 500;
+  background-color: rgba(0, 0, 0, .4);
+  /* padding: 10px 8%; */
+  /* border-top: 1px solid rgb(238, 238, 238); */
+  margin: 20px;
+  left: 228px;
+  display: block;
+  width: 208px;
+  padding: 10px 12px;
+  color: #fff;
+  /* border-radius: 10px; */
+  font-size: 16px;
+}
+
+.panel-send-money {
+  font-weight: 500;
+  /* background-color: rgba(0, 0, 0, .6); */
+  margin: 20px;
+  display: block;
+  bottom: 120px;
+  right: 0px;
+  padding: 10px 30px;
+  color: #333;
+  font-size: 16px;
+  position: fixed;
+  border-radius: 100px;
+  background: #fff;
+  font-weight: 700;
+  /* -webkit-box-shadow: 10px 10px 10px rgba(0, 0, 0, .5); */
+  /* box-shadow: 4px 4px 10px 0px rgba(0, 0, 0, .5); */
+  /* border: 1px solid #ddd; */
+
+  transition: .05s ease;
+}
+
+.panel-cash-out {
+  font-weight: 500;
+  /* background-color: rgba(0, 0, 0, .6); */
+  margin: 20px;
+  display: block;
+  bottom: 60px;
+  right: 0px;
+  padding: 10px 30px;
+  color: #333;
+  font-size: 16px;
+  position: fixed;
+  border-radius: 100px;
+  background: #fff;
+  font-weight: 700;
+  /* -webkit-box-shadow: 10px 10px 10px rgba(0, 0, 0, .5); */
+  /* box-shadow: 4px 4px 10px 0px rgba(0, 0, 0, .5); */
+  /* border: 1px solid #ddd; */
+  transition: .05s ease;
+}
+
+.panel-make-disappear {
+  font-weight: 500;
+  /* background-color: rgba(0, 0, 0, .6); */
+  margin: 20px;
+  display: block;
+  bottom: 0px;
+  right: 0px;
+  padding: 10px 30px;
+  color: #333;
+  font-size: 16px;
+  position: fixed;
+  border-radius: 100px;
+  background: #fff;
+  font-weight: 700;
+  /* -webkit-box-shadow: 10px 10px 10px rgba(0, 0, 0, .5); */
+  /* box-shadow: 4px 4px 10px 0px rgba(0, 0, 0, .5); */
+  /* border: 1px solid #ddd; */
+  transition: .05s ease;
+}
+
+.panel-send-money:hover, .panel-cash-out:hover, .panel-make-disappear:hover {
+  box-shadow: 0px 0px 0px 10px #e9e9e9;
 }
 
 .fade-enter-active, .fade-leave-active {
