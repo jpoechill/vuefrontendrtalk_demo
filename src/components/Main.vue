@@ -1,42 +1,48 @@
 <template>
   <div>
-    <div class="text-left fixed-bottom panel-info-count">
+    <!-- <div class="text-left fixed-bottom panel-info-count">
       <div class="text-center"><strong>${{ ttlProfits }}</strong></div>
-      <!-- <div class="text-left"><strong>visits today</strong> <span class="float-right"><light>{{ counters.daily }}</light></span></div> -->
     </div>
     <div class="text-left fixed-bottom panel-info">
       <div class="text-left"><strong>curr profits</strong> <span class="float-right"><light>${{ ttlProfits }}</light></span></div>
-      <!-- <div class="text-left"><strong>visits today</strong> <span class="float-right"><light>{{ counters.daily }}</light></span></div> -->
       <div class="text-left"><strong>visits this week</strong> <span class="float-right"><light>{{ counters.weekly }}</light></span></div>
       <div class="text-left"><strong>last seen</strong> <span class="float-right"><light>4 hours ago</light></span></div>
     </div>
     <div class="text-left fixed-bottom panel-bank-account">
+      <div class="text-left"><strong>innovation points</strong> <span class="float-right"><light>${{ bankAccount }}</light></span></div>
       <div class="text-left"><strong>bank account</strong> <span class="float-right"><light>${{ bankAccount }}</light></span></div>
     </div>
 
     <div class="text-center panel-send-money-01 fake-link" @click="playSound()">
-      <!-- Pay $10 -->
       Happy Customer
     </div>
     <div class="text-center panel-send-money-02 fake-link" @click="playSound()">
-      <!-- Pay $100 -->
       Very Happy Customer
     </div>
     <div class="text-center panel-send-money-03 fake-link" @click="playSound()">
-      Pay $1000
+      Burp
     </div>
     <div class="text-center panel-send-money-04 fake-link" @click="playSound()">
       Pay $10,000
     </div>
-    <!-- <div class="text-center panel-send-money fake-link" @click="playSound()">
-      Pay Now
-    </div> -->
+    <div class="text-center panel-send-money-05 fake-link" @click="playSound()">
+      Innovate
+    </div>
+    <div class="text-center panel-send-money-06 fake-link" @click="playSound()">
+      Sketch
+    </div>
+    <div class="text-center panel-send-money-07 fake-link" @click="playSound()">
+      Prototype
+    </div>
+    <div class="text-center panel-send-money-08 fake-link" @click="playSound()">
+      Design
+    </div>
     <div class="text-center panel-cash-out fake-link" @click="cashOut()">
       Cash Out
     </div>
     <div class="text-center panel-make-disappear fake-link" @click="cashOut()">
       Make Disappear
-    </div>
+    </div> -->
     <!-- Start Modal -->
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog d-flex h-50 align-items-center" role="document">
@@ -531,6 +537,71 @@ light {
   transition: .05s ease;
 }
 
+.panel-send-money-05 {
+  font-weight: 500;
+  margin: 20px;
+  display: block;
+  bottom: 370px;
+  right: 0px;
+  padding: 10px 30px;
+  color: #333;
+  font-size: 16px;
+  position: fixed;
+  border-radius: 100px;
+  background: #fff;
+  font-weight: 700;
+  transition: .05s ease;
+}
+
+.panel-send-money-06 {
+  font-weight: 500;
+  margin: 20px;
+  display: block;
+  bottom: 430px;
+  right: 0px;
+  padding: 10px 30px;
+  color: #333;
+  font-size: 16px;
+  position: fixed;
+  border-radius: 100px;
+  background: #fff;
+  font-weight: 700;
+  transition: .05s ease;
+}
+
+.panel-send-money-07 {
+  font-weight: 500;
+  margin: 20px;
+  display: block;
+  bottom: 490px;
+  right: 0px;
+  padding: 10px 30px;
+  color: #333;
+  font-size: 16px;
+  position: fixed;
+  border-radius: 100px;
+  background: #fff;
+  font-weight: 700;
+  transition: .05s ease;
+}
+
+
+.panel-send-money-08 {
+  font-weight: 500;
+  margin: 20px;
+  display: block;
+  bottom: 550px;
+  right: 0px;
+  padding: 10px 30px;
+  color: #333;
+  font-size: 16px;
+  position: fixed;
+  border-radius: 100px;
+  background: #fff;
+  font-weight: 700;
+  transition: .05s ease;
+}
+
 .panel-cash-out {
   font-weight: 500;
   /* background-color: rgba(0, 0, 0, .6); */
@@ -571,7 +642,14 @@ light {
   transition: .05s ease;
 }
 
-.panel-send-money-01:hover, .panel-send-money-02:hover, .panel-send-money-03:hover, .panel-send-money-04:hover {
+.panel-send-money-01:hover, 
+.panel-send-money-02:hover, 
+.panel-send-money-03:hover, 
+.panel-send-money-04:hover,
+.panel-send-money-05:hover,
+.panel-send-money-06:hover,
+.panel-send-money-07:hover,
+.panel-send-money-08:hover {
   box-shadow: 0px 0px 0px 10px #e9e9e9;
 }
 
