@@ -43,6 +43,19 @@
     <div class="text-center panel-make-disappear fake-link" @click="cashOut()">
       Make Disappear
     </div> -->
+     <!-- <div class="text-left fixed-bottom panel-info-count">
+      <div class="text-center"><strong>í {{ ttlProfits }}</strong></div>
+    </div> -->
+    <!-- <div class="text-center panel-cash-out fake-link" @click="playSound()">
+      Innovate
+    </div>
+    <div class="text-center panel-make-disappear fake-link" @click="cashOut()">
+      Cash Out
+    </div> -->
+    <!-- <div class="text-left fixed-bottom panel-info-custom">
+      lorem4
+      <div class="text-center"><strong>í {{ ttlProfits }}</strong></div>
+    </div> -->
     <!-- Start Modal -->
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog d-flex h-50 align-items-center" role="document">
@@ -89,7 +102,7 @@
       </div>
     </div>
     <div style="margin-top: 80px;"></div>
-    <div v-for="(item, index) in data" :key="index" class="w-100 pb-5 mb-2 position-relative">
+    <div v-for="(item, index) in data" :key="index" class="w-100 position-relative">
       <!-- <a :href="item.url" target="_blank"> -->
         <transition name="fade" appear>
           <div class="w-100 bg-primary position-relative" style="min-height: 100%; padding-bottom: 55%; background-size: cover;" v-bind:style="{ 'background-image': 'url(\'' + item.urlToImage + '\')' }">
@@ -107,7 +120,7 @@
           </div>
         </transition>
       <!-- </a> -->
-      <div class="container mt-4">
+      <!-- <div class="container mt-4">
         <div class="row pl-4 pr-4 pt-4 pb-2">
           <div class="offset-md-2 panel col-md-8 p-5">
             <a :href="item.url" target="_blank">
@@ -124,7 +137,7 @@
             </a>
           </div>
         </div>
-      </div>
+      </div> -->
     </div>
   </div>
 </template>
@@ -414,14 +427,28 @@ light {
   font-weight: 200;
 }
 
+.panel-info-custom {
+  font-weight: 500;
+  background-color: rgba(0, 0, 0, .4);
+  /* padding: 10px 8%; */
+  /* border-top: 1px solid rgb(238, 238, 238); */
+  margin: 20px 20px;
+  display: block;
+  width: 300px;
+  padding: 10px 12px;
+  color: #fff;
+  border-radius: 30px;
+  font-size: 80px;
+}
+
 .panel-info-count {
   font-weight: 500;
   background-color: rgba(0, 0, 0, .4);
   /* padding: 10px 8%; */
   /* border-top: 1px solid rgb(238, 238, 238); */
-  margin: 132px 20px;
+  margin: 20px 20px;
   display: block;
-  width: 208px;
+  width: 300px;
   padding: 10px 12px;
   color: #fff;
   border-radius: 30px;
