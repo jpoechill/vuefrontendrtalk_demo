@@ -57,6 +57,7 @@
       <div class="text-center"><strong>í {{ ttlProfits }}</strong></div>
     </div> -->
     <!-- Start Modal -->
+    <!-- Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ipsam, quidem. -->
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog d-flex h-50 align-items-center" role="document">
         <div class="modal-content w-100">
@@ -74,7 +75,7 @@
       </div>
     </div>
     <!-- End Modal -->
-    <div class="bg-white fixed-top nav-custom pt-2 pb-2">
+    <div v-bind:class="{ 'nav-hidden': toggleNav }" class="bg-white border-top-grey fixed-top nav-custom pt-2 pb-2">
       <div class="container h-100">
         <div class="row h-100">
           <div class="col-md-2 h-100 d-none d-md-block">
@@ -101,11 +102,32 @@
         </div>
       </div>
     </div>
-    <div style="margin-top: 80px;"></div>
-    <div v-for="(item, index) in data" :key="index" class="w-100 position-relative">
+    <!-- <div style="margin-top: 80px;"></div> -->
+    <transition name="fade" appear>
+      <div class="position-absolute fixed-bottom" v-show="showOverlay">
+        <div class="container">
+          <div class="row">
+            <div class="offset-md-3 col-md-6 mb-4 rounded bg-white op-9">
+              <transition name="fade" mode="in-out" :key="currArticle">
+                <div>
+                <div class="text-left" style="font-size: 20px; text-transform: uppercase; font-weight: 900;">
+                  {{ currArticle.title }}
+                </div>
+                <div class="text-left mt-3 pb-2">
+                  {{ currArticle.description }}
+                  <span class="fake-link float-right" @click="scrollToTop()">↥</span>
+                </div>
+                </div>
+              </transition>
+            </div>
+          </div>
+        </div>
+      </div>
+    </transition>
+    <div v-for="(item, index) in data" @click="toggleClick()" :key="index" :ref="index" class="w-100 position-relative">
       <!-- <a :href="item.url" target="_blank"> -->
-        <transition name="fade" appear>
-          <div class="w-100 bg-primary position-relative" style="min-height: 100%; padding-bottom: 55%; background-size: cover;" v-bind:style="{ 'background-image': 'url(\'' + item.urlToImage + '\')' }">
+        <!-- <transition name="fade" appear> -->
+          <div class="w-100 bg-primary position-relative" style="min-height: 100%; padding-bottom: 70%; background-size: cover;" v-bind:style="{ 'background-image': 'url(\'' + item.urlToImage + '\')' }">
             <div class="position-absolute">
               <div class="container">
                 <div class="row">
@@ -118,7 +140,7 @@
               </div>
             </div>
           </div>
-        </transition>
+        <!-- </transition> -->
       <!-- </a> -->
       <!-- <div class="container mt-4">
         <div class="row pl-4 pr-4 pt-4 pb-2">
@@ -154,10 +176,17 @@ export default {
     return {
       API_Key: '86fa2caa5dac471a98d05dfa2d141b6f',
       data: [],
+      scrollPos: 0,
+      showOverlay: true,
+      toggleNav: false,
       loaded: false,
       ttlProfits: 0,
       bankAccount: 0,
       searchText: '',
+      currArticle: {
+        title: '',
+        description: ''
+      },
       sources: [
         {
           name: 'MTV News',
@@ -189,13 +218,17 @@ export default {
   created () {
     this.getArticles('mtv-news')
   },
+  deactivate () {
+    window.removeEventListener('scroll', this.handleScroll);
+  },
   mounted() {
     this.getVisitors();
     this.updateCounts();
 
     this.loaded = true;
 
-    console.log('123')
+    window.addEventListener('scroll', this.handleScroll);
+    // console.log('123')
     // get visitor count
     //   day, week, month
     // add visitor count
@@ -213,6 +246,98 @@ export default {
     // this.$els.ping.addEventListener('ping', this.ping);
   // },
   methods: {
+    handleScroll () {
+      let prevScroll = this.scrollPos
+      let currScroll = window.scrollY
+      
+      // if (currScroll <= prevScroll) {
+      //   this.toggleNav = !this.toggleNav
+      // }
+
+      if (currScroll <= prevScroll) {
+        // console.log('Going up')
+        this.toggleNav = false;
+
+        // this.showOverlay = false
+      } else {
+        // console.log('Going down')
+        this.toggleNav = true;
+
+        // this.showOverlay = true
+      }
+
+      // for (let i in this.$refs) {
+      //   console.log(this.$refs['0'].getBoundingClientRect().top)
+      // }
+
+      // console.log(this.$refs['0'][0].offsetTop)
+      // if (this.$refs['0'] !== 'undefined') {
+      //   console.log(this.$refs['z0'][0].offsetTop)
+      // }
+
+      let self = this
+
+      let curr = null
+
+      this.scrollPos = window.scrollY
+
+      let scrollPos = this.scrollPos
+
+      for (let ref in self.$refs) {
+        // if (this.scrollPos > this.$refs[ref].offsetTop && this.scrollPos < (this.$refs[ref].offsetTop + this.$refs[ref].offsetHeight)) {
+        //   curr = this.$refs[ref]
+
+        //   console.log('curr: ' + curr)
+        // }
+        // console.log(self.$refs[ref][0].offsetTop)
+
+        let itemTop = self.$refs[ref][0].offsetTop
+        let itemHeight = self.$refs[ref][0].offsetHeight
+        
+        if (currScroll > itemTop && currScroll < (itemTop + itemHeight)) {
+          this.currArticle.title = this.data[ref].title
+          this.currArticle.description = this.data[ref].description
+        }
+
+        if (currScroll < self.$refs[1][0].offsetTop) {
+          this.currArticle.title = this.data[0].title
+          this.currArticle.description = this.data[0].description
+        }
+        console.log(currScroll)
+        // console.log(ref)
+
+        // console.log(self.$refs['0'][0].offsetTop)
+        // if (currScroll < (self.$refs[0][0].offsetTop + self.$refs[0][0].offsetHeight + 80)) {
+        //   this.currArticle.title = this.data['0'].title
+        //   this.currArticle.description = this.data['0'].description
+        // }
+        // console.log('scroll' + this.scrollPos)
+      }
+
+      // for (let i in this.$refs) {
+      //   console.log(this.$refs['0'])
+      // }
+      // console.log('scroll: ' + this.scrollPos)
+
+      // // item y top
+      // if (this.$refs['1'] !== 'undefined') {
+      //   console.log(this.$refs['z1'])
+      // }
+      
+      // console.log('innerHeight: ' + window.innerHeight)
+
+      // console.log('refs: ' + this.$refs)
+
+
+      // console.log(this.scrollPos)
+
+      // console.log(this.scrollPos, window.scrollY)
+    },
+    toggleClick () {
+      // // console.log('Click')
+      this.showOverlay = !this.showOverlay;
+      this.toggleNav = !this.toggleNav
+    },
     getVisitors () {
       let self = this
 
@@ -278,6 +403,11 @@ export default {
       .then(response => {
         let articles = response.data.articles
 
+
+          self.currArticle.title = articles[0].title
+          self.currArticle.description = articles[0].description
+
+
         articles.forEach(function (item, index) {
           Vue.set(self.data, index, item)
         })
@@ -317,13 +447,21 @@ textarea:focus, input:focus{
 
 .bg-white {
   background-color: #FFF;
-  border-top: 10px solid #eee;
   padding: 20px;
+}
+
+.border-top-grey {
+  border-top: 10px solid #eee;
 }
 
 .nav-custom {
   height: 80px;
   overflow: hidden;
+  transition: .24s ease-in-out;
+}
+
+.nav-hidden {
+  top: -100px;
 }
 
 .height-custom {
@@ -401,6 +539,10 @@ a:hover {
   padding-right: 8px;
   padding-left: 8px;
   font-size: 16px;
+}
+
+.op-9 {
+  opacity: .9;
 }
 
 .panel {
@@ -669,6 +811,14 @@ light {
   transition: .05s ease;
 }
 
+.vh-100 {
+  height: 100vh;
+}
+
+.rounded {
+  border-radius: 20px;
+}
+
 .panel-send-money-01:hover, 
 .panel-send-money-02:hover, 
 .panel-send-money-03:hover, 
@@ -687,7 +837,6 @@ light {
 .fade-enter-active, .fade-leave-active {
   transition: opacity .5s;
 }
-
 .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
   opacity: 0;
 }
