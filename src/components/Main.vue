@@ -542,7 +542,7 @@ a:hover {
 }
 
 .op-9 {
-  opacity: .9;
+  opacity: 1;
 }
 
 .panel {
