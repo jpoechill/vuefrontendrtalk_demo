@@ -127,8 +127,8 @@
     <div v-for="(item, index) in data" @click="toggleClick()" :key="index" :ref="index" class="w-100 position-relative">
       <!-- <a :href="item.url" target="_blank"> -->
         <!-- <transition name="fade" appear> -->
-          <div class="w-100 bg-primary position-relative" style="min-height: 100%; padding-bottom: 70%; background-size: cover;" v-bind:style="{ 'background-image': 'url(\'' + item.urlToImage + '\')' }">
-            <div class="position-absolute">
+          <div class="polygon w-100 bg-primary position-relative" style="min-height: 100%; padding-bottom: 70%; background-size: cover; background-position: center; " v-bind:style="{ 'background-image': 'url(\'' + item.urlToImage + '\')' }">
+            <!-- <div class="position-absolute">
               <div class="container">
                 <div class="row">
                   <div class="col-md-12 text-left">
@@ -138,7 +138,7 @@
                   </div>
                 </div>
               </div>
-            </div>
+            </div> -->
           </div>
         <!-- </transition> -->
       <!-- </a> -->
@@ -147,7 +147,7 @@
           <div class="offset-md-2 panel col-md-8 p-5">
             <a :href="item.url" target="_blank">
               <div>
-                <div class="text-left" style="font-size: 20px; text-transform: uppercase; font-weight: 900;">
+                <div class="text-left" style="font-size: 18px; text-transform: uppercase; font-weight: 900;">
                   {{ item.title }} 
                   <br><br>
                 </div>
@@ -809,6 +809,12 @@ light {
   /* box-shadow: 4px 4px 10px 0px rgba(0, 0, 0, .5); */
   /* border: 1px solid #ddd; */
   transition: .05s ease;
+}
+
+.polygon {
+  -webkit-clip-path: polygon(0 14%, 100% 0%, 100% 86%, 0% 100%);
+  clip-path: polygon(0 14%, 100% 0%, 100% 86%, 0% 100%);
+  margin-top: -130px;
 }
 
 .vh-100 {

@@ -3,7 +3,7 @@
     <Main/>
     <div class="container pb-4">
       <div class="row pb-5">
-        <div class="col-md-12 pb-2" style="text-align: center; font-size: 14px; margin-bottom: 4px;  margin-top: 10px;">
+        <div class="col-md-12 pb-2" style="text-align: right; font-size: 14px; margin-bottom: 4px;  margin-top: 10px;">
           <a href="http://rithfolio.com">
             <img src="/static/Po_logo.png" style="margin-right: 22px; width: 28px; height: 28px; margin-top: -20px;" alt="">
           </a>
@@ -41,11 +41,11 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   margin-top: 12px;
-  font-size: 18px;
+  font-size: 16px;
 }
 
 .modal-content {
-  border-radius: 20px;
+  border-radius: 18px;
   padding: 10px;
   /* top: 80px; */
   border: 10px solid #eee;
@@ -67,7 +67,7 @@ body {
 }
 
 .modal-open{
-  overflow: hidden;
+  /* overflow: hidden; */
   padding-right:0 !important;
   margin-top: 80px;
   margin-right: 0px;
