@@ -107,19 +107,21 @@
       <div class="position-absolute fixed-bottom" v-show="showOverlay">
         <div class="container">
           <div class="row">
-            <div class="offset-md-3 col-md-6 mb-4 rounded bg-white op-9">
-              <transition name="fade" mode="in-out" :key="currArticle">
-                <div>
-                <div class="text-left" style="font-size: 20px; text-transform: uppercase; font-weight: 900;">
-                  {{ currArticle.title }}
-                </div>
-                <div class="text-left mt-3 pb-2">
-                  {{ currArticle.description }}
-                  <span class="fake-link float-right" @click="scrollToTop()">↥</span>
-                </div>
-                </div>
-              </transition>
-            </div>
+              <div class="offset-md-3 col-md-6 mb-4 rounded panel bg-white op-9">
+                <transition name="fade" mode="in-out" :key="currArticle">
+                  <div>
+                    <a :href="currArticle.url" target="_blank">
+                      <div class="text-left" style="font-size: 20px; text-transform: uppercase; font-weight: 900;">
+                        {{ currArticle.title }}
+                      </div>
+                      <div class="text-left mt-3 pb-2">
+                        {{ currArticle.description }}
+                        <span class="fake-link float-right" @click="scrollToTop()">↥</span>
+                      </div>
+                    </a>
+                  </div>
+                </transition>
+              </div>
           </div>
         </div>
       </div>
@@ -185,7 +187,8 @@ export default {
       searchText: '',
       currArticle: {
         title: '',
-        description: ''
+        description: '',
+        url: ''
       },
       sources: [
         {
@@ -297,11 +300,13 @@ export default {
         if (currScroll > itemTop && currScroll < (itemTop + itemHeight)) {
           this.currArticle.title = this.data[ref].title
           this.currArticle.description = this.data[ref].description
+          this.currArticle.url = this.data[ref].url
         }
 
         if (currScroll < self.$refs[1][0].offsetTop) {
           this.currArticle.title = this.data[0].title
           this.currArticle.description = this.data[0].description
+          this.currArticle.url = this.data[0].url
         }
         console.log(currScroll)
         // console.log(ref)
