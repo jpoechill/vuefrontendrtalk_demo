@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="292px" height="250px" viewBox="0 0 292 250" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.6 (67491) - http://www.bohemiancoding.com/sketch -->
+    <title>Group</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Group" transform="translate(147.060660, 125.560660) rotate(-225.000000) translate(-147.060660, -125.560660) translate(22.560660, -35.939340)" fill="#333333">
+            <path d="M97,283.142089 C41.4726128,270.622883 -3.29691829e-12,220.999391 -3.29691829e-12,161.689452 C-3.29691829e-12,102.379512 41.4726128,52.75602 97,40.2368144 L97,90.354122 C68.9012218,101.348612 49,128.694942 49,160.689452 C49,192.683961 68.9012218,220.030291 96.9999991,231.024775 L97,283.142089 Z M152,40.2368144 C207.527387,52.75602 249,102.379512 249,161.689452 C249,220.999391 207.527387,270.622883 152,283.142089 L152,231.024781 C180.098778,220.030291 200,192.683961 200,160.689452 C200,128.694942 180.098778,101.348612 152.000001,90.3541282 L152,40.2368144 Z" id="Combined-Shape"></path>
+            <polygon id="Triangle" transform="translate(100.889110, 60.472652) rotate(-300.000000) translate(-100.889110, -60.472652) " points="100.88911 26.9726519 150.38911 93.9726519 51.38911 93.9726519"></polygon>
+            <polygon id="Triangle-Copy-2" transform="translate(149.143016, 262.756298) rotate(-117.000000) translate(-149.143016, -262.756298) " points="149.143016 229.256298 198.643016 296.256298 99.6430163 296.256298"></polygon>
+        </g>
+    </g>
+</svg>

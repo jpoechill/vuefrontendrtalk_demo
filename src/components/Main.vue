@@ -20,19 +20,35 @@
     <div v-bind:class="{ 'nav-hidden': toggleNav }" class="bg-white border-top-grey fixed-top nav-custom pt-2 pb-2">
       <div class="container h-100">
         <div class="row h-100">
+          <!-- Hide on Mobile -->
           <div class="col-md-2 h-100 d-none d-md-block">
             <div class="h-100 d-flex align-items-center">
-              <a href="/" class="h-100 p-1">
-                <img src="/static/logo.png" class="h-99 pt-1" alt="xNews">
+              <a href="/" class="h-75 p-1">
+                <img src="/static/logo-02.svg" class="h-100 rotated" alt="xNews">
               </a>
             </div>
           </div>
-          <div class="col-md-8 header d-flex align-items-center justify-content-center">
-            <span v-for="(source, index) in sources" :key="index" @click="getArticles(source.slug)">{{ source.title }}</span>
-            <span>
+          <div class="col-md-8 header d-flex align-items-center disable-scrollbar">
+            <!-- <span class="pr-5"></span> -->
+            <!-- <span class="ml-5 d-inline"></span> -->
+            <!-- <div class="d-inline" style="width: 0px;">&nbsp;</div> -->
+            <!-- <div class="w-100">123</div> -->
+            <div style="margin: auto; white-space: nowrap;">
+              
+              <span v-for="(source, index) in sources" class="d-inline-block header-link" :key="index" @click="getArticles(source.slug)">{{ source.title }}</span>
+              | <span class="d-inline header-link">
+                <a href="https://juxtapoz.com" target="_blank">JUX</a>
+              </span>
+            </div>
+            <!-- <span v-for="(source, index) in sources" class="d-inline" :key="index" @click="getArticles(source.slug)">{{ source.title }}</span>
+              <span>
               <a href="https://juxtapoz.com" target="_blank">JUX</a>
             </span>
+
+            <div class="d-inline" style="width: 200px;">&nbsp;</div> -->
+            <!-- <span class="pr-2 d-inline"></span> -->
           </div>
+          <!-- Hide on Mobile -->
           <div class="col-md-2 header h-100 d-none d-md-block">
             <div class="h-100 d-flex align-items-center justify-content-end">
               <div data-toggle="modal" data-target="#exampleModal">
@@ -405,6 +421,24 @@ export default {
 </script>
 
 <style scoped>
+.rotated {
+  animation: rotation 5s infinite linear;
+}
+
+
+.rotated:hover {
+  animation-play-state: paused;
+}
+
+@keyframes rotation {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(359deg);
+  }
+}
+
 textarea:focus, input:focus{
   outline: none;
 }
@@ -439,20 +473,19 @@ textarea:focus, input:focus{
   font-weight: 700;
 }
 
-.header span {
-  margin-left: 10px;
-  margin-right: 10px;
-}
-
-.header > span {
+.header-link {
+  /* margin-left: 10px;
+  margin-right: 10px; */
   color: #111;
-  margin: 4px 24px;
+  /* margin: 4px 24px; */
+  padding: 4px 24px;
   border-radius: 20px;
+  /* background-color: #f7f7f7; */
 }
 
-.header > span:hover {
-  padding: 4px 24px;
-  margin: 0;
+.header-link:hover {
+  /* margin: 0; */
+  /* padding: 4px 24px; */
   cursor: pointer;
   background-color: #f7f7f7;
   transition: .05s ease;
@@ -464,7 +497,7 @@ textarea:focus, input:focus{
 }
 
 .h-99 {
-  height: 94%!important;
+  height: 75%!important;
   padding-top: 6px!important;
 }
 
@@ -799,6 +832,29 @@ light {
 .panel-send-money-08:hover {
   box-shadow: 0px 0px 0px 10px #e9e9e9;
 }
+
+.pl-100 {
+  padding-left: 200px;
+}
+
+.pr-100 {
+  padding-right: 200px;
+}
+
+/* Hide Horizontal Scrollbar */
+
+.disable-scrollbar::-webkit-scrollbar {
+    width: 0px;
+    background: transparent;
+}
+
+.disable-scrollbar {
+  padding-top: 8px;
+  overflow-x: scroll;
+  scrollbar-width: none; 
+  -ms-overflow-style: none;
+}
+
 
 .panel-send-money:hover, .panel-cash-out:hover, .panel-make-disappear:hover {
   box-shadow: 0px 0px 0px 10px #e9e9e9;
