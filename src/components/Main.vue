@@ -5,11 +5,11 @@
         <div class="modal-content w-100">
           <div class="modal-body text-left">
             Sources: <br>
-            <input type="checkbox" name="" id=""> Source <br>
-            <input type="checkbox" name="" id=""> Source <br>
-            <input type="checkbox" name="" id=""> Source <br>
-            <input type="checkbox" name="" id=""> Source <br>
-            <input type="checkbox" name="" id=""> Source <br><br>
+            <input type="checkbox" name="" id=""> Mtv <br>
+            <input type="checkbox" name="" id=""> Verge <br>
+            <input type="checkbox" name="" id=""> Polygon <br>
+            <input type="checkbox" name="" id=""> Nat Geo <br>
+            <input type="checkbox" name="" id=""> BBC <br><br>
             Links: <br>
             Juxtapoz
           </div>
@@ -29,7 +29,6 @@
           </div>
           <div class="col-md-8 header d-flex align-items-center justify-content-center">
             <span v-for="(source, index) in sources" :key="index" @click="getArticles(source.slug)">{{ source.title }}</span>
-            <!-- <span class="pl-2 pr-2">| </span> -->
             <span>
               <a href="https://juxtapoz.com" target="_blank">JUX</a>
             </span>
@@ -44,8 +43,56 @@
         </div>
       </div>
     </div>
-    <!-- <div style="margin-top: 80px;"></div> -->
-    <transition name="fade" appear>
+    <!-- Start body -->
+    <div class="container mt-80 pt-4 pb-0">
+      <div v-for="(item, index) in data" :key="index" class="row pb-4">
+          <div class="col-md-6 pb-4">
+            <div class="position-relative pb-50p w-100">
+              <div class="content-ratio bg-black overflow-hidden rounded">
+                <div class="content-main overflow-hidden">
+                  <img :src="item.urlToImage" class="w-100" alt="">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="bg-white text-left rounded">
+              <div class="font-weight-bold text-uppercase">
+                {{ item.title }}
+              </div>
+              <div class="pt-3 pb-1 mb-2">
+                {{ item.description }}
+              </div>
+              <p>
+                <a :href="item.url" target="_blank">
+                  Visit Page →
+                </a>
+              </p>
+            </div>
+            <!-- <div class="position-relative pb-50p w-100">
+              <div class="content-ratio text-left bg-white rounded">
+                  <div class="font-weight-bold text-uppercase">
+                    {{ item.title }}
+                  </div>
+                  <div class="pt-3 pb-1 mb-2">
+                    {{ item.description }}
+                  </div>
+                  <p>
+                    <a :href="item.url" target="_blank">
+                      Visit →
+                    </a>
+                  </p>
+              </div>
+            </div> -->
+          </div>
+      </div>
+    </div>
+    <!-- <div v-for="(item, index) in data" @click="toggleClick()" :key="index" :ref="index" class="w-100 position-relative">
+          <div class="polygon w-100 bg-primary position-relative" style="min-height: 100%; padding-bottom: 70%; background-size: cover; background-position: center; " v-bind:style="{ 'background-image': 'url(\'' + item.urlToImage + '\')' }">
+
+          </div>
+    </div> -->
+    <!-- <transition name="fade" appear>
       <div class="position-absolute fixed-bottom" v-show="showOverlay">
         <div class="container">
           <div class="row">
@@ -67,44 +114,12 @@
           </div>
         </div>
       </div>
-    </transition>
-    <div v-for="(item, index) in data" @click="toggleClick()" :key="index" :ref="index" class="w-100 position-relative">
-      <!-- <a :href="item.url" target="_blank"> -->
-        <!-- <transition name="fade" appear> -->
+    </transition> -->
+    <!-- <div v-for="(item, index) in data" @click="toggleClick()" :key="index" :ref="index" class="w-100 position-relative">
           <div class="polygon w-100 bg-primary position-relative" style="min-height: 100%; padding-bottom: 70%; background-size: cover; background-position: center; " v-bind:style="{ 'background-image': 'url(\'' + item.urlToImage + '\')' }">
-            <!-- <div class="position-absolute">
-              <div class="container">
-                <div class="row">
-                  <div class="col-md-12 text-left">
-                    <span v-if="item.source" :style="{ backgroundColor: getPastelColour() }" class="bg-pastel">
-                      {{ item.source.name }}
-                    </span>
-                  </div>
-                </div>
-              </div>
-            </div> -->
+
           </div>
-        <!-- </transition> -->
-      <!-- </a> -->
-      <!-- <div class="container mt-4">
-        <div class="row pl-4 pr-4 pt-4 pb-2">
-          <div class="offset-md-2 panel col-md-8 p-5">
-            <a :href="item.url" target="_blank">
-              <div>
-                <div class="text-left" style="font-size: 18px; text-transform: uppercase; font-weight: 900;">
-                  {{ item.title }} 
-                  <br><br>
-                </div>
-                <div class="text-left">
-                  {{ item.description }} <br><br> <span class="fake-link" @click="scrollToTop()">↥</span>
-                  <br>
-                </div>
-              </div>
-            </a>
-          </div>
-        </div>
-      </div> -->
-    </div>
+    </div> -->
   </div>
 </template>
 
@@ -119,7 +134,9 @@ export default {
   data () {
     return {
       API_Key: '86fa2caa5dac471a98d05dfa2d141b6f',
-      data: [],
+      data: [
+        null, null, null
+      ],
       scrollPos: 0,
       showOverlay: true,
       toggleNav: false,
@@ -769,7 +786,7 @@ light {
 }
 
 .rounded {
-  border-radius: 20px;
+  border-radius: 20px !important;
 }
 
 .panel-send-money-01:hover, 

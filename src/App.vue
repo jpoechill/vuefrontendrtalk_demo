@@ -1,9 +1,9 @@
 <template>
   <div id="app">
     <Main/>
-    <div class="container pb-4">
-      <div class="row pb-5">
-        <div class="col-md-12 pb-2" style="text-align: right; font-size: 14px; margin-bottom: 4px;  margin-top: 10px;">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12 pb-2" style="text-align: center; font-size: 14px; margin-bottom: 4px;  margin-top: 10px;">
           <a href="http://rithfolio.com">
             <img src="/static/Po_logo.png" style="margin-right: 22px; width: 28px; height: 28px; margin-top: -20px;" alt="">
           </a>
@@ -67,10 +67,55 @@ body {
 }
 
 .modal-open{
-  /* overflow: hidden; */
+  overflow: visible !important;
   padding-right:0 !important;
   margin-top: 80px;
   margin-right: 0px;
 }
 
+.mt-80 {
+  margin-top: 80px;
+}
+
+.overflow-hidden {
+  overflow: hidden;
+}
+
+.position-absolute {
+  position: absolute;
+}
+
+.position-relative {
+  position: relative;
+}
+
+.pb-50p {
+  padding-bottom: 52%;
+}
+
+.bg-black {
+  background-color: black;
+}
+
+.font-weight-bold {
+  font-weight: 900;
+}
+
+.content-ratio { 
+  width: 100%;
+  position: absolute; 
+  padding-bottom: 52%;
+}
+
+.content-main {
+  top: 50%;
+  left: 50%;
+  margin-right: -50%;
+  position: absolute;
+  transform: translate(-50%, -50%);
+}
+
+.bg-dark {
+  background-color: grey;
+}
 </style>
