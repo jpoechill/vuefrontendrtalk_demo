@@ -80,8 +80,9 @@
                 {{ item.description }}
               </div>
               <p>
-                <a :href="item.url" target="_blank">
-                  Visit Page →
+                {{ currTime }}
+                <a :href="item.url" class="float-right" target="_blank">
+                  → Visit Page
                 </a>
               </p>
             </div>
@@ -150,6 +151,7 @@ export default {
   data () {
     return {
       API_Key: '86fa2caa5dac471a98d05dfa2d141b6f',
+      currTime: '',
       data: [
         null, null, null
       ],
@@ -204,6 +206,8 @@ export default {
     this.updateCounts();
 
     this.loaded = true;
+
+    this.initTime();
 
     window.addEventListener('scroll', this.handleScroll);
     // console.log('123')
@@ -394,6 +398,13 @@ export default {
 
         window.scrollTo(0, 0);
       })
+    },
+    initTime: function(){  
+      let self = this
+      setInterval(() => {
+          let d = new Date().toLocaleTimeString();
+          self.currTime = d;
+      }, 1000);
     },
     cashOut () {
       let file = '/static/shazam.mp3'
