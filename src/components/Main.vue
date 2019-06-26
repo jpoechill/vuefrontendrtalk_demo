@@ -79,12 +79,15 @@
               <div class="pt-3 pb-1 mb-2">
                 {{ item.description }}
               </div>
-              <p>
-                {{ currTime }}
-                <a :href="item.url" class="float-right" target="_blank">
-                  → Visit Page
-                </a>
-              </p>
+              <div class="pb-0">
+                <div class="d-inline" v-if="index === 0">{{ currTime }}</div>
+                <div class="d-inline" v-else>&nbsp;</div>
+                <div class="d-inline">
+                  <a :href="item.url" class="float-right" target="_blank">
+                    → Visit Page
+                  </a>
+                </div>
+              </div>
             </div>
             <!-- <div class="position-relative pb-50p w-100">
               <div class="content-ratio text-left bg-white rounded">
