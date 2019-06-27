@@ -16,25 +16,60 @@
         </div>
       </div>
     </div>
+    <div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog d-flex h-50 align-items-center" role="document">
+        <div class="modal-content w-100">
+          <p class="pt-2"> 
+            <span class="fake-link" @click="toggleLogin = false;">Login</span> | <span class="fake-link" @click="toggleLogin = true;">Sign Up</span>
+          </p>
+          <div v-if="!toggleLogin" class="modal-body text-left text-center">
+            <div class="w-100 text-left">
+              Username or Email
+            </div>
+            <input type="text" class="form-control mb-3">
+            <div class="w-100 text-left">
+              Password
+            </div>
+            <input type="text" class="form-control">
+            <button class="btn btn-success form-control mt-4" data-dismiss="modal" @click="loggedIn = true; playHello()">
+              Login
+            </button>
+          </div>
+          <div v-else class="modal-body text-left text-center">
+            <div class="w-100 text-left">
+              Username or Email
+            </div>
+            <input type="text" class="form-control mb-3">
+            <div class="w-100 text-left">
+              Password
+            </div>
+            <input type="text" class="form-control">
+            <button class="btn btn-success form-control mt-4" data-dismiss="modal" @click="loggedIn = true; playHello()">
+              Sign Up
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <!-- End Modal -->
     <div v-bind:class="{ 'nav-hidden': toggleNav }" class="bg-white border-top-grey fixed-top nav-custom pt-2 pb-2">
       <div class="container h-100">
         <div class="row h-100">
           <!-- Hide on Mobile -->
-          <div class="col-md-2 h-100 d-none d-md-block">
+          <div class="col-md-3 header h-100 d-none d-md-block">
             <div class="h-100 d-flex align-items-center">
-              <a href="/" class="h-75 p-1">
-                <img src="/static/logo-02.svg" class="h-100 rotated" alt="xNews">
-              </a>
+              <div data-toggle="modal" data-target="#exampleModal">
+                <span class="fake-link">•••</span>
+              </div>
             </div>
           </div>
-          <div class="col-md-8 header d-flex align-items-center disable-scrollbar">
+          <div class="col-md-6 header d-flex align-items-center disable-scrollbar">
             <!-- <span class="pr-5"></span> -->
             <!-- <span class="ml-5 d-inline"></span> -->
             <!-- <div class="d-inline" style="width: 0px;">&nbsp;</div> -->
             <!-- <div class="w-100">123</div> -->
             <div style="margin: auto; white-space: nowrap;">
-              
               <span v-for="(source, index) in sources" class="d-inline-block header-link" :key="index" @click="getArticles(source.slug)">{{ source.title }}</span>
               | <span class="d-inline header-link">
                 <a href="https://juxtapoz.com" target="_blank">JUX</a>
@@ -49,11 +84,25 @@
             <!-- <span class="pr-2 d-inline"></span> -->
           </div>
           <!-- Hide on Mobile -->
-          <div class="col-md-2 header h-100 d-none d-md-block">
-            <div class="h-100 d-flex align-items-center justify-content-end">
-              <div data-toggle="modal" data-target="#exampleModal">
-                <span class="fake-link">•••</span>
+          <div class="col-md-3 h-100 d-none d-md-block text-right w-100">
+            <div class="h-100 w-100 d-flex align-items-center justify-content-end">
+              <div v-if="!loggedIn">
+                <div data-toggle="modal" data-target="#exampleModal2">
+                  <span class="fake-link" @click="toggleLogin = false;">
+                    Login
+                  </span> | 
+                  <span class="fake-link" @click="toggleLogin = true;">
+                    Sign Up
+                  </span>
+                </div>
               </div>
+              <div v-else class="h-100 p-1">
+                <img src="/static/avatar.png" class="mr-2 h-100" alt="xNews" style="border-radius: 50px;"> 
+                  Preferences | <div @click="loggedIn = false; playByebye()" class="fake-link d-inline">Sign Out</div>
+              </div>
+              <!-- <a href="/" class="h-100 p-1">
+                <img src="/static/avatar.png" class="h-100" alt="xNews" style="border-radius: 50px;">
+              </a> -->
             </div>
           </div>
         </div>
@@ -158,6 +207,8 @@ export default {
       data: [
         null, null, null
       ],
+      toggleLogin: true,
+      loggedIn: false,
       scrollPos: 0,
       showOverlay: true,
       toggleNav: false,
@@ -414,15 +465,25 @@ export default {
       var audio = new Audio(file);
       audio.play();
 
-      this.bankAccount += this.ttlProfits
-      this.ttlProfits = 0;
+      // this.bankAccount += this.ttlProfits
+      // this.ttlProfits = 0;
     },
     playSound: function () {
       let file = '/static/cha-ching.mp3'
       var audio = new Audio(file);
       audio.play();
 
-      this.ttlProfits += 10;
+      // this.ttlProfits += 10;
+    },
+    playByebye: function () {
+      let file = '/static/sound-byebye.mp3'
+      var audio = new Audio(file);
+      audio.play();
+    },
+    playHello: function () {
+      let file = '/static/sound-hello.mp3'
+      var audio = new Audio(file);
+      audio.play();
     },
     getPastelColour: function () {
       return "hsl(" + 360 * Math.random() + ',' + (25 + 70 * Math.random()) + '%,' + (85 + 10 * Math.random()) + '%)';
