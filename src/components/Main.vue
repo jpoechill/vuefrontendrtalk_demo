@@ -1,6 +1,8 @@
 <template>
   <div>
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div data-dismiss="modal" class="position-absolute" style="background-color: rgba(0,0,0,.5); z-index: -1; top: 0; right: 0; left: 0; bottom: 0;">
+      </div>
       <div class="modal-dialog d-flex h-50 align-items-center" role="document">
         <div class="modal-content w-100">
           <div class="modal-body text-left">
@@ -17,10 +19,12 @@
       </div>
     </div>
     <div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div data-dismiss="modal" class="position-absolute" style="background-color: rgba(0,0,0,.5); z-index: -1; top: 0; right: 0; left: 0; bottom: 0;">
+      </div>
       <div class="modal-dialog d-flex h-50 align-items-center" role="document">
         <div class="modal-content w-100">
           <p class="pt-2"> 
-            <span class="fake-link" @click="toggleLogin = false;">Login</span> | <span class="fake-link" @click="toggleLogin = true;">Sign Up</span>
+            <span class="fake-link" @click="toggleLogin = false;">Login</span> | <span class="fake-link" @click="toggleLogin = true;">Sign Up</span> | <span class="fake-link" @click="toggleLogin = true;">Forgot Password</span> 
           </p>
           <div v-if="!toggleLogin" class="modal-body text-left text-center">
             <div class="w-100 text-left">
@@ -51,8 +55,8 @@
         </div>
       </div>
     </div>
-
     <!-- End Modal -->
+
     <div v-bind:class="{ 'nav-hidden': toggleNav }" class="bg-white border-top-grey fixed-top nav-custom pt-2 pb-2">
       <div class="container h-100">
         <div class="row h-100">
@@ -71,9 +75,13 @@
             <!-- <div class="w-100">123</div> -->
             <div style="margin: auto; white-space: nowrap;">
               <span v-for="(source, index) in sources" class="d-inline-block header-link" :key="index" @click="getArticles(source.slug)">{{ source.title }}</span>
-              | <span class="d-inline header-link">
+              | 
+              <span class="d-inline header-link">
                 <a href="https://juxtapoz.com" target="_blank">JUX</a>
               </span>
+              <!-- <span class="d-inline header-link">
+                <a href="https://juxtapoz.com" target="_blank">OPTIONS</a>
+              </span> -->
             </div>
             <!-- <span v-for="(source, index) in sources" class="d-inline" :key="index" @click="getArticles(source.slug)">{{ source.title }}</span>
               <span>
@@ -97,98 +105,63 @@
                 </div>
               </div>
               <div v-else class="h-100 p-1">
-                <img src="/static/avatar.png" class="mr-2 h-100" alt="xNews" style="border-radius: 50px;"> 
-                  Preferences | <div @click="loggedIn = false; playByebye()" class="fake-link d-inline">Sign Out</div>
+                Po R. <span style="font-size: 10px; position: relative; top: -2px; margin-left: 6px;">▼</span>
+                <img src="/static/avatar.png" @click="loggedIn=false; playByebye()" class="fake-link ml-3 mr-2 h-100" alt="xNews" style="border-radius: 50px;"> 
+                <!-- Preferences | <div @click="loggedIn = false; playByebye()" class="fake-link d-inline">Sign Out</div> -->
               </div>
-              <!-- <a href="/" class="h-100 p-1">
-                <img src="/static/avatar.png" class="h-100" alt="xNews" style="border-radius: 50px;">
-              </a> -->
             </div>
           </div>
         </div>
       </div>
     </div>
+
     <!-- Start body -->
-    <div class="container mt-80 pt-4 pb-0">
-      <div v-for="(item, index) in data" :key="index" class="row pb-4">
-          <div class="col-md-6 pb-4">
-            <div class="position-relative pb-50p w-100">
-              <div class="content-ratio bg-black overflow-hidden rounded">
-                <div class="content-main overflow-hidden">
-                  <img :src="item.urlToImage" class="w-100" alt="">
-                </div>
+    <div v-if="!showNews" class="container mt-80 pt-4 pb-0 font-weight-bold py-5 mb-5" @click="showNews = !showNews;" style="font-size: 5rem;">
+      Closed for the weekend! 
+    </div>
+    
+    <div v-if="showNews" class="container mt-80 pt-4 pb-0">
+      <div class="row pb-4" v-for="(item, index) in data" :key="index">
+        <div class="col-md-6 pb-4">
+          <div class="position-relative pb-50p w-100">
+            <div class="content-ratio bg-black overflow-hidden rounded">
+              <div class="content-main overflow-hidden">
+                <img :src="item.urlToImage" class="w-100" alt="">
               </div>
             </div>
           </div>
-          <div class="col-md-6">
-            <div class="bg-white text-left rounded">
-              <div class="font-weight-bold text-uppercase">
-                {{ item.title }}
-              </div>
-              <div class="pt-3 pb-1 mb-2">
-                {{ item.description }}
-              </div>
-              <div class="pb-0">
-                <div class="d-inline" v-if="index === 0">{{ currTime }}</div>
-                <div class="d-inline" v-else>&nbsp;</div>
-                <div class="d-inline">
-                  <a :href="item.url" class="float-right" target="_blank">
-                    → Visit Page
-                  </a>
-                </div>
-              </div>
+        </div>
+        <div class="col-md-6">
+          <div class="bg-white rounded text-left">
+            <div class="font-weight-bold text-uppercase">
+              {{ item.title }}
             </div>
-            <!-- <div class="position-relative pb-50p w-100">
-              <div class="content-ratio text-left bg-white rounded">
-                  <div class="font-weight-bold text-uppercase">
-                    {{ item.title }}
-                  </div>
-                  <div class="pt-3 pb-1 mb-2">
-                    {{ item.description }}
-                  </div>
-                  <p>
-                    <a :href="item.url" target="_blank">
-                      Visit →
-                    </a>
-                  </p>
+            <div class="pt-3 pb-1 mb-2">
+              {{ item.description }}
+            </div>
+            <!-- <div class="pt-3 pb-1 mb-2">
+              Fake Avatars...
+              <div class="mt-2">
+                <img src="/static/avatars/avatar-01.png" style="margin-right: -25px; max-height: 60px;" alt="">
+                <img src="/static/avatars/avatar-01.png" style="margin-right: -25px; max-height: 60px;" alt="">
+                <img src="/static/avatars/avatar-01.png" style="margin-right: -25px; max-height: 60px;" alt="">
+                <img src="/static/avatars/avatar-01.png" style="margin-right: -25px; max-height: 60px;" alt="">
+                <img src="/static/avatars/avatar-01.png" style="margin-right: -25px; max-height: 60px;" alt="">
+                <img src="/static/avatars/avatar-01.png" style="margin-right: -25px; max-height: 60px;" alt="">
+                
               </div>
             </div> -->
-          </div>
-      </div>
-    </div>
-    <!-- <div v-for="(item, index) in data" @click="toggleClick()" :key="index" :ref="index" class="w-100 position-relative">
-          <div class="polygon w-100 bg-primary position-relative" style="min-height: 100%; padding-bottom: 70%; background-size: cover; background-position: center; " v-bind:style="{ 'background-image': 'url(\'' + item.urlToImage + '\')' }">
-
-          </div>
-    </div> -->
-    <!-- <transition name="fade" appear>
-      <div class="position-absolute fixed-bottom" v-show="showOverlay">
-        <div class="container">
-          <div class="row">
-              <div class="offset-md-3 col-md-6 mb-4 rounded panel bg-white op-9">
-                <transition name="fade" mode="in-out" :key="currArticle">
-                  <div>
-                    <a :href="currArticle.url" target="_blank">
-                      <div class="text-left" style="font-size: 20px; text-transform: uppercase; font-weight: 900;">
-                        {{ currArticle.title }}
-                      </div>
-                      <div class="text-left mt-3 pb-2">
-                        {{ currArticle.description }}
-                        <span class="fake-link float-right" @click="scrollToTop()">↥</span>
-                      </div>
-                    </a>
-                  </div>
-                </transition>
-              </div>
+            <div class="w-100 mt-3 d-block">
+              {{ item.publishedAt }}
+              <a :href="item.url" class="float-right" target="_blank">
+                → Visit Story
+                <!-- <button class="btn-dark w-100 py-2 font-weight-bold text-uppercase">→ Go to Story</button> -->
+              </a>
+            </div>
           </div>
         </div>
       </div>
-    </transition> -->
-    <!-- <div v-for="(item, index) in data" @click="toggleClick()" :key="index" :ref="index" class="w-100 position-relative">
-          <div class="polygon w-100 bg-primary position-relative" style="min-height: 100%; padding-bottom: 70%; background-size: cover; background-position: center; " v-bind:style="{ 'background-image': 'url(\'' + item.urlToImage + '\')' }">
-
-          </div>
-    </div> -->
+    </div>
   </div>
 </template>
 
@@ -207,6 +180,7 @@ export default {
       data: [
         null, null, null
       ],
+      showNews: true,
       toggleLogin: true,
       loggedIn: false,
       scrollPos: 0,
@@ -496,6 +470,20 @@ export default {
 </script>
 
 <style scoped>
+.btn-dark {
+    background-color: #007bff!important;
+    border-radius: 50px;
+    transition: .4s ease-in-out;
+    color: #fff!important;
+    border: none!important;
+    box-shadow: none!important;
+}
+
+.btn-dark:hover, btn-dark:active, btn-dark:focus {
+  cursor: pointer;
+  box-shadow: 4px 4px 8px rgba(0,0,0,.25)!important;
+}
+
 .rotated {
   animation: rotation 5s infinite linear;
 }
@@ -895,6 +883,14 @@ light {
 
 .rounded {
   border-radius: 20px !important;
+}
+
+.rounded-top {
+  border-radius: 20px 20px 0px 0px !important;
+}
+
+.rounded-bottom {
+  border-radius: 0px 0px 20px 20px !important
 }
 
 .panel-send-money-01:hover, 
