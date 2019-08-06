@@ -152,7 +152,7 @@
               </div>
             </div> -->
             <div class="w-100 mt-3 d-block">
-              {{ item.publishedAt }}
+              {{ convertDate(item.publishedAt) }}
               <a :href="item.url" class="float-right" target="_blank">
                 → Visit Story
                 <!-- <button class="btn-dark w-100 py-2 font-weight-bold text-uppercase">→ Go to Story</button> -->
@@ -256,6 +256,13 @@ export default {
     // this.$els.ping.addEventListener('ping', this.ping);
   // },
   methods: {
+    convertDate(inputDate) {
+      var date = new Date(inputDate);
+      var weekday = ["Sunday", "Monday" ,"Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
+      var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+
+      return weekday[date.getDay()] + ' – ' + months[date.getMonth()] + ' ' + date.getDate() + 'th, ' + (date.getYear() + 1900) + ' @ ' +  date.getHours() + ':' + date.getMinutes()
+    },
     handleScroll () {
       let prevScroll = this.scrollPos
       let currScroll = window.scrollY
