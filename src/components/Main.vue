@@ -152,7 +152,7 @@
               </div>
             </div> -->
             <div class="w-100 mt-3 d-block">
-              {{ convertDate(item.publishedAt) }}
+              Posted: {{ convertDate(item.publishedAt) }}
               <a :href="item.url" class="float-right" target="_blank">
                 → Visit Story
                 <!-- <button class="btn-dark w-100 py-2 font-weight-bold text-uppercase">→ Go to Story</button> -->
