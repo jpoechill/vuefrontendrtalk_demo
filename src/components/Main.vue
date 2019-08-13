@@ -75,6 +75,7 @@
             <!-- <div class="w-100">123</div> -->
             <div style="margin: auto; white-space: nowrap;">
               <span v-for="(source, index) in sources" class="d-inline-block header-link" :key="index" @click="getArticles(source.slug)">{{ source.title }}</span>
+              <!-- <span class="d-inline-block header-link" @click="getDesignboom()">DBOOM</span> -->
               | 
               <span class="d-inline header-link">
                 <a href="https://juxtapoz.com" target="_blank">JUX</a>
@@ -152,7 +153,7 @@
               </div>
             </div> -->
             <div class="w-100 mt-3 d-block">
-              Posted: {{ convertDate(item.publishedAt) }}
+              Posted: <span v-cloak>{{ convertDate(item.publishedAt) }}</span>
               <a :href="item.url" class="float-right" target="_blank">
                 → Visit Story
                 <!-- <button class="btn-dark w-100 py-2 font-weight-bold text-uppercase">→ Go to Story</button> -->
@@ -197,12 +198,6 @@ export default {
       },
       sources: [
         {
-          name: 'MTV News',
-          title: 'MTV',
-          slug: 'mtv-news',
-          visible: true
-        },
-        {
           name: 'The Verge',
           title: 'VERGE',
           slug: 'the-verge',
@@ -214,6 +209,18 @@ export default {
           slug: 'polygon',
           visible: true
         },
+        {
+          name: 'MTV News',
+          title: 'MTV',
+          slug: 'mtv-news',
+          visible: false
+        },
+        // {
+        //   name: 'Designboom',
+        //   title: 'DBOOM',
+        //   slug: 'dboom',
+        //   visible: true
+        // },
       ],
       counters: {
         daily: '',
@@ -422,6 +429,29 @@ export default {
       .then(response => {
         let articles = response.data.articles
 
+
+          self.currArticle.title = articles[0].title
+          self.currArticle.description = articles[0].description
+
+
+        articles.forEach(function (item, index) {
+          Vue.set(self.data, index, item)
+        })
+
+        window.scrollTo(0, 0);
+      })
+    },
+    getDesignboom: function () {
+      let self = this
+
+      alert('123')
+      self.data = [{}]
+
+      axios.get('https://loving-mayer-d80a26.netlify.com/.netlify/functions/hello')
+      .then(response => {
+        let articles = response.data
+
+        console.log(articles)
 
           self.currArticle.title = articles[0].title
           self.currArticle.description = articles[0].description
