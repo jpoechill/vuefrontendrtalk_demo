@@ -61,14 +61,14 @@
       <div class="container h-100">
         <div class="row h-100">
           <!-- Hide on Mobile -->
-          <div class="col-md-3 header h-100 d-none d-md-block">
+          <!-- <div class="col-md-3 header h-100 d-none d-md-block">
             <div class="h-100 d-flex align-items-center">
               <div data-toggle="modal" data-target="#exampleModal">
                 <span class="fake-link">•••</span>
               </div>
             </div>
-          </div>
-          <div class="col-md-6 header d-flex align-items-center disable-scrollbar">
+          </div> -->
+          <div class="col-md-12 header d-flex align-items-center disable-scrollbar">
             <!-- <span class="pr-5"></span> -->
             <!-- <span class="ml-5 d-inline"></span> -->
             <!-- <div class="d-inline" style="width: 0px;">&nbsp;</div> -->
@@ -93,7 +93,7 @@
             <!-- <span class="pr-2 d-inline"></span> -->
           </div>
           <!-- Hide on Mobile -->
-          <div class="col-md-3 h-100 d-none d-md-block text-right w-100">
+          <!-- <div class="col-md-3 h-100 d-none d-md-block text-right w-100">
             <div class="h-100 w-100 d-flex align-items-center justify-content-end">
               <div v-if="!loggedIn">
                 <div data-toggle="modal" data-target="#exampleModal2">
@@ -108,10 +108,9 @@
               <div v-else class="h-100 p-1">
                 Po R. <span style="font-size: 10px; position: relative; top: -2px; margin-left: 6px;">▼</span>
                 <img src="/static/avatar.png" @click="loggedIn=false; playByebye()" class="fake-link ml-3 mr-2 h-100" alt="xNews" style="border-radius: 50px;"> 
-                <!-- Preferences | <div @click="loggedIn = false; playByebye()" class="fake-link d-inline">Sign Out</div> -->
               </div>
             </div>
-          </div>
+          </div> -->
         </div>
       </div>
     </div>
@@ -198,6 +197,12 @@ export default {
       },
       sources: [
         {
+          name: 'MTV News',
+          title: 'MTV',
+          slug: 'mtv-news',
+          visible: false
+        },
+        {
           name: 'The Verge',
           title: 'VERGE',
           slug: 'the-verge',
@@ -208,12 +213,6 @@ export default {
           title: 'POLYGON',
           slug: 'polygon',
           visible: true
-        },
-        {
-          name: 'MTV News',
-          title: 'MTV',
-          slug: 'mtv-news',
-          visible: false
         },
         // {
         //   name: 'Designboom',
