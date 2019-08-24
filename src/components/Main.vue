@@ -77,8 +77,11 @@
               <span v-for="(source, index) in sources" class="d-inline-block header-link" :key="index" @click="getArticles(source.slug)">{{ source.title }}</span>
               <!-- <span class="d-inline-block header-link" @click="getDesignboom()">DBOOM</span> -->
               | 
-              <span class="d-inline header-link">
+              <!-- <span class="d-inline header-link">
                 <a href="https://juxtapoz.com" target="_blank">JUX</a>
+              </span> -->
+              <span class="d-inline header-link">
+                TODOS
               </span>
               <!-- <span class="d-inline header-link">
                 <a href="https://juxtapoz.com" target="_blank">OPTIONS</a>
