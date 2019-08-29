@@ -270,7 +270,7 @@ export default {
       var weekday = ["Sunday", "Monday" ,"Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
       var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
-      return weekday[date.getDay()] + ' – ' + months[date.getMonth()] + ' ' + date.getDate() + 'th, ' + (date.getYear() + 1900) + ' @ ' +  date.getHours() + ':' + date.getMinutes()
+      return weekday[date.getDay()] + ' @ ' +  date.getHours() + ':' + date.getMinutes()
     },
     handleScroll () {
       let prevScroll = this.scrollPos
