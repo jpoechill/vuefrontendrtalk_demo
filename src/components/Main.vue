@@ -125,7 +125,7 @@
     
     <div v-if="showNews" class="container mt-80 pt-4 pb-0">
       <div class="row pb-4" v-for="(item, index) in data" :key="index">
-        <div class="col-md-6 pb-4">
+        <div class="col-md-12 pb-4">
           <div class="position-relative pb-50p w-100">
             <div class="content-ratio bg-black overflow-hidden rounded">
               <div class="content-main overflow-hidden">
@@ -134,7 +134,7 @@
             </div>
           </div>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-12">
           <div class="bg-white rounded text-left">
             <div class="font-weight-bold text-uppercase">
               {{ item.title }}
