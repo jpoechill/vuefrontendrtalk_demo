@@ -125,7 +125,7 @@
     
     <div v-if="showNews" class="container mt-80 pt-4 pb-0">
       <div class="row pb-4" v-for="(item, index) in data" :key="index">
-        <div class="col-md-12 pb-4">
+        <div class="col-md-6 pb-4">
           <div class="position-relative pb-50p w-100">
             <div class="content-ratio bg-black overflow-hidden rounded">
               <div class="content-main overflow-hidden">
@@ -134,7 +134,7 @@
             </div>
           </div>
         </div>
-        <div class="col-md-12">
+        <div class="col-md-6">
           <div class="bg-white rounded text-left">
             <div class="font-weight-bold text-uppercase">
               {{ item.title }}
@@ -157,7 +157,7 @@
             <div class="w-100 mt-3 d-block">
               <span v-cloak>{{ convertDate(item.publishedAt) }}</span>
               <a :href="item.url" class="float-right" target="_blank">
-                → Visit Story
+                → Go to Story
                 <!-- <button class="btn-dark w-100 py-2 font-weight-bold text-uppercase">→ Go to Story</button> -->
               </a>
             </div>
@@ -426,8 +426,9 @@ export default {
     getArticles: function (source) {
       let self = this
       self.data = [{}]
+      alert('123')
 
-      axios.get('https://newsapi.org/v2/everything?sources=' + source + '&apiKey=86fa2caa5dac471a98d05dfa2d141b6f')
+      axios.get('https://cors-anywhere.herokuapp.com/https://newsapi.org/v2/everything?sources=' + source + '&apiKey=86fa2caa5dac471a98d05dfa2d141b6f')
       .then(response => {
         let articles = response.data.articles
 
