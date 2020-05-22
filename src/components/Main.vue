@@ -426,7 +426,7 @@ export default {
     getArticles: function (source) {
       let self = this
       self.data = [{}]
-      alert('123')
+      // alert('123'
 
       axios.get('https://cors-anywhere.herokuapp.com/https://newsapi.org/v2/everything?sources=' + source + '&apiKey=86fa2caa5dac471a98d05dfa2d141b6f')
       .then(response => {
